@@ -1,0 +1,30 @@
+[
+    {
+        "_id" : "abc123",
+        "title" : "Cannot save a new car",
+        "description" : "problem when clicking Save",
+        "severity" : 3,
+        "createdAt" : 1542107359454
+    },
+    {
+        "_id" : "def456",
+        "title" : "Page does not load",
+        "description" : "Blank screen when accessing dashboard",
+        "severity" : 2,
+        "createdAt" : 1542107459454
+    },
+    {
+        "_id" : "ghi789",
+        "title" : "Error on login",
+        "description" : "User receives error message on login attempt",
+        "severity" : 1,
+        "createdAt" : 1542107559454
+    },
+    {
+        "_id" : "jkl012",
+        "title" : "Button not responsive",
+        "description" : "Settings button does not respond to clicks",
+        "severity" : 2,
+        "createdAt" : 1542107659454
+    }
+]
