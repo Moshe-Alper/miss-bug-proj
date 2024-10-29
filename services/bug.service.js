@@ -13,12 +13,8 @@ export const bugService = {
     query,
     getById,
     remove,
+    save,
 }
-
-// const eventBus = new EventEmitter()
-// setTimeout(() => {
-//     eventBus.emit('say_tal', ['12345'])
-// }, 2000)
 
 function query() {
     return Promise.resolve(bugs)
@@ -34,8 +30,19 @@ function getById(bugId) {
 function remove(bugId) {
     const bugIdx = bugs.findIndex(bug => bug._id === bugId)
     if (bugIdx < 0) return Promise.reject('Cannot find bug - ' + bugId)
-    bugs.splice(bugIdx, 1)
+        bugs.splice(bugIdx, 1)
     return _saveBugsToFile()
+}
+
+function save(bugToSave) {
+    if (bugToSave._id) {
+        const bugIdx = bugs.findIndex(bug => bug._id === bugToSave._id)
+        bugs[bugIdx] = bugToSave
+    } else {
+        bugToSave._id = utilService.makeId()
+        bugs.unshift(bugToSave)
+    }
+    return _saveBugsToFile().then(() => bugToSave)
 }
 
 function _saveBugsToFile() {
@@ -50,9 +57,6 @@ function _saveBugsToFile() {
     })
 }
 
-function save(bug) {
-
-}
 
 function _createBugs() {
     let bugs = utilService.loadFromStorage(STORAGE_KEY)
@@ -81,7 +85,12 @@ function _createBugs() {
         ]
         utilService.saveToStorage(STORAGE_KEY, bugs)
     }
-
-
-
+    
+    // const eventBus = new EventEmitter()
+    // setTimeout(() => {
+    //     eventBus.emit('say_hello', ['12345'])
+    // }, 2000)
+    
+    
+    
 }
