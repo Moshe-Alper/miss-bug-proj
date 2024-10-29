@@ -1,31 +1,10 @@
 [
     {
-        "_id": "HDXLI",
-        "title": "oops",
-        "description": "ohhh",
-        "severity": 4,
-        "createdAt": 1730203920043
-    },
-    {
-        "_id": "iuDLq",
-        "title": "Bug 2 Update",
-        "description": "Details about the bug",
-        "severity": 3,
-        "createdAt": 1730204375559
-    },
-    {
-        "_id": "j4gYb",
-        "title": "Bug Report Update",
-        "description": "Details about the bug",
-        "severity": 3,
-        "createdAt": 1730204407742
-    },
-    {
         "_id": "abc123",
-        "title": "Cannot save a new car",
-        "description": "problem when clicking Save",
-        "severity": 3,
-        "createdAt": 1542107359454
+        "title": "Cannot save a new bug",
+        "description": "Cant open file",
+        "severity": 4,
+        "createdAt": 1730209051963
     },
     {
         "_id": "def456",
