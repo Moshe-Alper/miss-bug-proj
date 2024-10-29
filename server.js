@@ -1,8 +1,10 @@
 import express from 'express'
 import { bugService } from './services/bug.service.js'
 import { loggerService } from './services/logger.service.js'
+import cookieParser from 'cookie-parser'
 import EventEmitter from 'node:events'
 const app = express()
+app.use(cookieParser())
 
 app.use(express.static('public'))
 
@@ -25,15 +27,33 @@ app.get('/api/bug/save', (req, res) => {
         createdAt: req.query.createdAt || Date.now(),
     }
     bugService.save(bugToSave)
-    .then(savedBug => res.send(savedBug))
-    .catch(err => {
-        loggerService.error('Cannot save bug:', err)
-        res.status(500).send('Cannot save bug')
-    })
+        .then(savedBug => res.send(savedBug))
+        .catch(err => {
+            loggerService.error('Cannot save bug:', err)
+            res.status(500).send('Cannot save bug')
+        })
 })
 
 app.get('/api/bug/:bugId', (req, res) => {
     const { bugId } = req.params
+
+    let visitedBugs = req.cookies.visitedBugs ? JSON.parse(req.cookies.visitedBugs) : []
+    console.log('Visited Bug:', visitedBugs)
+
+    if (!visitedBugs.includes(bugId)) {
+        visitedBugs.push(bugId)
+    }
+
+    if (visitedBugs.length > 3) {
+        loggerService.error(`User reached visited bugs limit: ${visitedBugs}`)
+        return res.status(401).send('Wait for a bit')
+    }
+
+    res.cookie('visitedBugs', JSON.stringify(visitedBugs), { maxAge: 7000 })
+    res.cookie('lastVisitedBugId', bugId, { maxAge: 7000 })
+
+    console.log('User visited at the following bugs:', visitedBugs)
+
     bugService.getById(bugId)
         .then(bug => res.send(bug))
         .catch(err => {
@@ -45,7 +65,7 @@ app.get('/api/bug/:bugId', (req, res) => {
 app.get('/api/bug/:bugId/remove', (req, res) => {
     const { bugId } = req.params
     bugService.remove(bugId)
-    .then(() => res.send(bugId + ' Removed Successfully!'))
+        .then(() => res.send(bugId + ' Removed Successfully!'))
         .catch(err => {
             loggerService.error('Cannot remove bug', err)
             res.status(500).send('Cannot remove bug')
@@ -57,6 +77,7 @@ app.get('/api/logs', (req, res) => {
     const path = process.cwd()
     res.sendFile(path + '/logs/backend.log')
 })
+
 
 // const eventBus = new EventEmitter()
 // eventBus.on('say_hello', (data) => {
