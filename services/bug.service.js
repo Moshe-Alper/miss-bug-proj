@@ -18,7 +18,7 @@ export const bugService = {
 
 function query() {
     return Promise.resolve(bugs)
-    //...later
+
 }
 
 function getById(bugId) {
@@ -37,9 +37,11 @@ function remove(bugId) {
 function save(bugToSave) {
     if (bugToSave._id) {
         const bugIdx = bugs.findIndex(bug => bug._id === bugToSave._id)
+        bugToSave = {...bugs[bugIdx], ...bugToSave, updatedAt: Date.now()}
         bugs[bugIdx] = bugToSave
     } else {
         bugToSave._id = utilService.makeId()
+        bugToSave.createdAt = Date.now()
         bugs.unshift(bugToSave)
     }
     return _saveBugsToFile().then(() => bugToSave)

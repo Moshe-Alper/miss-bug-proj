@@ -6,7 +6,9 @@ import EventEmitter from 'node:events'
 const app = express()
 app.use(cookieParser())
 
+const eventBus = new EventEmitter()
 app.use(express.static('public'))
+
 
 
 app.get('/api/bug', (req, res) => {
@@ -20,11 +22,10 @@ app.get('/api/bug', (req, res) => {
 
 app.get('/api/bug/save', (req, res) => {
     const bugToSave = {
-        _id: req.query._id,
-        title: req.query.title,
-        description: req.query.description,
-        severity: +req.query.severity,
-        createdAt: req.query.createdAt || Date.now(),
+        _id: req.query._id || '',
+        title: req.query.title || '',
+        description: req.query.description || '',
+        severity: +req.query.severity || 0,
     }
     bugService.save(bugToSave)
         .then(savedBug => res.send(savedBug))
@@ -34,25 +35,29 @@ app.get('/api/bug/save', (req, res) => {
         })
 })
 
-app.get('/api/bug/:bugId', (req, res) => {
+function trackVisitedBugs(req, res, next) {
     const { bugId } = req.params
+    let visitedBugs = req.cookies.visitedBugs || []
 
-    let visitedBugs = req.cookies.visitedBugs ? JSON.parse(req.cookies.visitedBugs) : []
-    console.log('Visited Bug:', visitedBugs)
+    console.log('Visited Bugs:', visitedBugs)
 
     if (!visitedBugs.includes(bugId)) {
         visitedBugs.push(bugId)
     }
 
     if (visitedBugs.length > 3) {
-        loggerService.error(`User reached visited bugs limit: ${visitedBugs}`)
+        eventBus.emit('userExceededBugLimit', visitedBugs)
         return res.status(401).send('Wait for a bit')
     }
 
-    res.cookie('visitedBugs', JSON.stringify(visitedBugs), { maxAge: 7000 })
+    res.cookie('visitedBugs', visitedBugs, { maxAge: 7000 })
     res.cookie('lastVisitedBugId', bugId, { maxAge: 7000 })
 
-    console.log('User visited at the following bugs:', visitedBugs)
+    next()
+}
+
+app.get('/api/bug/:bugId', trackVisitedBugs, (req, res) => {
+    const { bugId } = req.params
 
     bugService.getById(bugId)
         .then(bug => res.send(bug))
@@ -72,18 +77,23 @@ app.get('/api/bug/:bugId/remove', (req, res) => {
         })
 })
 
+// Get a pdf file
+// app.get('/api/pdf', (req, res) => {
+//     const path = process.cwd()
+//     res.sendFile(path + '/logs/backend.log')
+// })
+
+
 // Log in browser (temporary - will not be used later)
 app.get('/api/logs', (req, res) => {
     const path = process.cwd()
     res.sendFile(path + '/logs/backend.log')
 })
 
-
-// const eventBus = new EventEmitter()
-// eventBus.on('say_hello', (data) => {
-//     console.log('started', data)
-
-//   })
+// visit limit event
+eventBus.on('userExceededBugLimit', (visitedBugs) => {
+    loggerService.error(`User reached visited bugs limit: ${visitedBugs}`)
+})
 
 // setTimeout(() => {
 //     eventBus.emit('say_hello', ['12345'])
