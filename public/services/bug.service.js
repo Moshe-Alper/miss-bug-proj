@@ -7,9 +7,10 @@ export const bugService = {
     getById,
     save,
     remove,
+    getDefaultFilter,
 }
 
-function query() {
+function query(filterBy = {}) {
     return axios
         .get(BASE_URL, {params:{...filterBy}})
         .then(res=>res.data)
@@ -35,3 +36,8 @@ function save(bug) {
         console.log('err:', err)
       })
 }
+
+function getDefaultFilter() {
+    return { txt: '', minSeverity: 0 }
+  }
+  
