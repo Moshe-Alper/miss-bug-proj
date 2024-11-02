@@ -81,11 +81,16 @@ export function BugIndex() {
         setFilterBy(newFilter)
     }
 
+    function onDownloadPdf() {
+        window.open('/pdf', '_blank');
+    }
+
     return (
         <main>
             <section className='info-actions'>
                 <h3>Bugs App</h3>
                 <button onClick={onAddBug}>Add Bug ⛐</button>
+                <button onClick={onDownloadPdf}>Download PDF</button>
                 <BugFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             </section>
             <main>
