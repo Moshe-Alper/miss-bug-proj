@@ -10,7 +10,8 @@ export const bugService = {
 }
 
 function query() {
-    return axios.get(BASE_URL)
+    return axios
+        .get(BASE_URL, {params:{...filterBy}})
         .then(res=>res.data)
 }
 

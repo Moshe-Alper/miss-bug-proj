@@ -1,8 +1,8 @@
 import express from 'express'
-import { bugService } from './services/bug.service.js'
-import { loggerService } from './services/logger.service.js'
 import cookieParser from 'cookie-parser'
 import EventEmitter from 'node:events'
+import { bugService } from './services/bug.service.js'
+import { loggerService } from './services/logger.service.js'
 const app = express()
 app.use(cookieParser())
 
@@ -82,10 +82,15 @@ app.get('/api/bug/:bugId/remove', (req, res) => {
 })
 
 // Get a pdf file
-// app.get('/api/pdf', (req, res) => {
-//     const path = process.cwd()
-//     res.sendFile(path + '/logs/backend.log')
-// })
+app.get('/pdf', (req, res) => {
+    const path = './pdfs/test.pdf'
+    bugService.generatePdfStream().then(() => {
+        console.log('PDF ready')
+    })
+    // res.download(path, 'modPdf.pdf')
+
+    res.send('Downloading Pdf')
+})
 
 
 // Log in browser (temporary - will not be used later)
