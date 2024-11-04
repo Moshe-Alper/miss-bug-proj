@@ -82,6 +82,34 @@ eventBus.on('userExceededBugLimit', (visitedBugs) => {
     loggerService.error(`User reached visited bugs limit: ${visitedBugs}`)
 })
 
+
+
+function trackVisitedBugs(req, res, next) {
+    const { bugId } = req.params
+    let visitedBugs = req.cookies.visitedBugs || []
+    
+    console.log('Visited Bugs:', visitedBugs)
+    
+    if (!visitedBugs.includes(bugId)) {
+        visitedBugs.push(bugId)
+    }
+    
+    if (visitedBugs.length > 3) {
+        eventBus.emit('userExceededBugLimit', visitedBugs)
+        return res.status(401).send('Wait for a bit')
+    }
+    
+    res.cookie('visitedBugs', visitedBugs, { maxAge: 7000 })
+    res.cookie('lastVisitedBugId', bugId, { maxAge: 7000 })
+    
+    next()
+}
+
+const port = 3030
+app.listen(port, () =>
+    loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
+)
+
 // setTimeout(() => {
 //     eventBus.emit('say_hello', ['12345'])
 // }, 2000)
@@ -93,29 +121,3 @@ eventBus.on('userExceededBugLimit', (visitedBugs) => {
 //     console.log('req:', req.headers)
 //     next()
 // })
-
-const port = 3030
-app.listen(port, () =>
-    loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
-)
-
-function trackVisitedBugs(req, res, next) {
-    const { bugId } = req.params
-    let visitedBugs = req.cookies.visitedBugs || []
-
-    console.log('Visited Bugs:', visitedBugs)
-
-    if (!visitedBugs.includes(bugId)) {
-        visitedBugs.push(bugId)
-    }
-
-    if (visitedBugs.length > 3) {
-        eventBus.emit('userExceededBugLimit', visitedBugs)
-        return res.status(401).send('Wait for a bit')
-    }
-
-    res.cookie('visitedBugs', visitedBugs, { maxAge: 7000 })
-    res.cookie('lastVisitedBugId', bugId, { maxAge: 7000 })
-
-    next()
-}

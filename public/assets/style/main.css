@@ -180,3 +180,24 @@ nav a:hover {
 .action-btn + .action-btn {
     margin: 0 8px; 
 }
+
+
+/* labels */
+.bug-labels {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.label {
+    padding: 4px 8px;
+    background-color: #e0e0e0;
+    color: #333;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: bold;
+    background-color: lightcoral;
+    margin: 0 8px;
+
+}

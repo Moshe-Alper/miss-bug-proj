@@ -1,30 +1,50 @@
 [
     {
-        "_id" : "abc123",
-        "title" : "Cannot save a new bug",
-        "description" : "problem when clicking Save",
-        "severity" : 3,
-        "createdAt" : 1542107359454
+        "_id": "abc123",
+        "title": "Cannot save a Car",
+        "description": "Problem when clicking Save",
+        "severity": 3,
+        "createdAt": 1542107359454,
+        "labels": ["critical", "need-CR", "dev-branch"]
     },
     {
-        "_id" : "def456",
-        "title" : "Page does not load",
-        "description" : "Blank screen when accessing dashboard",
-        "severity" : 2,
-        "createdAt" : 1542107459454
+        "_id": "def456",
+        "title": "Page does not load",
+        "description": "Blank screen when accessing dashboard",
+        "severity": 2,
+        "createdAt": 1542107459454,
+        "labels": ["frontend", "urgent", "UI-issue"]
     },
     {
-        "_id" : "ghi789",
-        "title" : "Error on login",
-        "description" : "User receives error message on login attempt",
-        "severity" : 1,
-        "createdAt" : 1542107559454
+        "_id": "ghi789",
+        "title": "Error on login",
+        "description": "User receives error message on login attempt",
+        "severity": 1,
+        "createdAt": 1542107559454,
+        "labels": ["authentication", "backend", "high-priority"]
     },
     {
-        "_id" : "jkl012",
-        "title" : "Button not responsive",
-        "description" : "Settings button does not respond to clicks",
-        "severity" : 2,
-        "createdAt" : 1542107659454
+        "_id": "jkl012",
+        "title": "Button not responsive",
+        "description": "Settings button does not respond to clicks",
+        "severity": 2,
+        "createdAt": 1542107659454,
+        "labels": ["UI", "minor", "needs-investigation"]
+    },
+    {
+        "_id": "mno345",
+        "title": "Form validation error",
+        "description": "Validation error does not display on required fields",
+        "severity": 2,
+        "createdAt": 1542107759454,
+        "labels": ["validation", "frontend", "user-experience"]
+    },
+    {
+        "_id": "pqr678",
+        "title": "Data sync issue",
+        "description": "User data does not sync across devices",
+        "severity": 3,
+        "createdAt": 1542107859454,
+        "labels": ["backend", "sync", "medium-priority"]
     }
 ]
