@@ -110,3 +110,73 @@ nav a:hover {
 .container {
     padding-inline: 8rem;
 }
+
+/* filter */
+.bug-filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bug-filter input[type="text"],
+.bug-filter input[type="number"] {
+    padding: 8px;
+    border: 1px solid lightskyblue;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    width: 150px;
+    background-color: #fff;
+}
+
+.bug-filter button {
+    padding: 8px 12px;
+    font-size: 16px;
+    color: whitesmoke;
+    background-color: lightskyblue;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bug-filter button:hover {
+    background-color: #87ceeb; 
+}
+
+.bug-filter input[type="text"]::placeholder,
+.bug-filter input[type="number"]::placeholder {
+    color: #888;
+    opacity: 0.8;
+}
+
+/* buttons */
+.action-btn {
+    padding: 8px 12px;
+    font-size: 16px;
+    color: whitesmoke;
+    background-color: lightskyblue;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: #87ceeb;
+    transform: translateY(-2px); 
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+.action-btn + .action-btn {
+    margin: 0 8px; 
+}

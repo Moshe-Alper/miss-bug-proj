@@ -39,27 +39,6 @@ app.get('/api/bug/save', (req, res) => {
         })
 })
 
-function trackVisitedBugs(req, res, next) {
-    const { bugId } = req.params
-    let visitedBugs = req.cookies.visitedBugs || []
-
-    console.log('Visited Bugs:', visitedBugs)
-
-    if (!visitedBugs.includes(bugId)) {
-        visitedBugs.push(bugId)
-    }
-
-    if (visitedBugs.length > 3) {
-        eventBus.emit('userExceededBugLimit', visitedBugs)
-        return res.status(401).send('Wait for a bit')
-    }
-
-    res.cookie('visitedBugs', visitedBugs, { maxAge: 7000 })
-    res.cookie('lastVisitedBugId', bugId, { maxAge: 7000 })
-
-    next()
-}
-
 app.get('/api/bug/:bugId', trackVisitedBugs, (req, res) => {
     const { bugId } = req.params
 
@@ -92,7 +71,6 @@ app.get('/pdf', (req, res) => {
     res.send('Downloading Pdf')
 })
 
-
 // Log in browser (temporary - will not be used later)
 app.get('/api/logs', (req, res) => {
     const path = process.cwd()
@@ -116,8 +94,28 @@ eventBus.on('userExceededBugLimit', (visitedBugs) => {
 //     next()
 // })
 
-
 const port = 3030
 app.listen(port, () =>
     loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
 )
+
+function trackVisitedBugs(req, res, next) {
+    const { bugId } = req.params
+    let visitedBugs = req.cookies.visitedBugs || []
+
+    console.log('Visited Bugs:', visitedBugs)
+
+    if (!visitedBugs.includes(bugId)) {
+        visitedBugs.push(bugId)
+    }
+
+    if (visitedBugs.length > 3) {
+        eventBus.emit('userExceededBugLimit', visitedBugs)
+        return res.status(401).send('Wait for a bit')
+    }
+
+    res.cookie('visitedBugs', visitedBugs, { maxAge: 7000 })
+    res.cookie('lastVisitedBugId', bugId, { maxAge: 7000 })
+
+    next()
+}
