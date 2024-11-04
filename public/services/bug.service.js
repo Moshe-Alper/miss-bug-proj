@@ -12,32 +12,40 @@ export const bugService = {
 
 function query(filterBy = {}) {
     return axios
-        .get(BASE_URL, {params:{...filterBy}})
-        .then(res=>res.data)
+        .get(BASE_URL, { params: { ...filterBy } })
+        .then(res => res.data)
 }
 
 function getById(bugId) {
     return axios.get(BASE_URL + bugId)
-        .then(res=>res.data)
+        .then(res => res.data)
 }
 
 function remove(bugId) {
-    return axios.get(BASE_URL + bugId + '/remove')
-        .then(res=>res.data)
+    return axios.delete(BASE_URL + bugId)
+        .then(res => res.data)
 }
 
 function save(bug) {
-  const url = BASE_URL + 'save'
-  let queryParams = `?title=${bug.title}&severity=${bug.severity}&description=${bug.description}`
-  if (bug._id) queryParams += `&_id=${bug._id}`
-  return axios.get(url + queryParams)
-      .then(res => res.data)
-      .catch(err => {
-        console.log('err:', err)
-      })
+
+    if (bug._id) {
+        return axios.put(BASE_URL + bug._id, bug)
+            .then(res => res.data)
+            .catch(err => {
+                console.log('err:', err)
+                throw err
+            })
+    } else {
+        return axios.post(BASE_URL, bug)
+            .then(res => res.data)
+            .catch(err => {
+                console.log('err:', err)
+                throw err
+            })
+
+    }
 }
 
 function getDefaultFilter() {
     return { txt: '', minSeverity: 0 }
-  }
-  
+}

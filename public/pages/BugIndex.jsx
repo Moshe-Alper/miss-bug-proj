@@ -43,12 +43,14 @@ export function BugIndex() {
             title: prompt('Bug title?'),
             severity: +prompt('Bug severity?'),
             description: prompt('Add description'),
+            labels: getLabels(),
         }
         bugService
             .save(bug)
             .then((savedBug) => {
                 console.log('Added Bug', savedBug)
                 setBugs([...bugs, savedBug])
+                loadBugs()
                 showSuccessMsg('Bug added')
             })
             .catch((err) => {
@@ -58,9 +60,10 @@ export function BugIndex() {
     }
 
     function onEditBug(bug) {
+        const title = prompt('New Title?')
         const severity = +prompt('New severity?')
         const description = prompt('Edit description')
-        const bugToSave = { ...bug, severity, description }
+        const bugToSave = { ...bug, title, severity, description }
         bugService
             .save(bugToSave)
             .then((savedBug) => {
@@ -83,6 +86,19 @@ export function BugIndex() {
 
     function onDownloadPdf() {
         window.open('/pdf', '_blank');
+    }
+
+    function getLabels() {
+        const labels = [];
+        while (labels.length < 3) {
+            const label = prompt(`Enter label ${labels.length + 1} (you need ${3 - labels.length} more):`)
+            if (label) {
+                labels.push(label)
+            } else {
+                alert('Label cannot be empty. Please enter a valid label.')
+            }
+        }
+        return labels
     }
 
     return (

@@ -1,11 +1,16 @@
 [
     {
-        "_id": "abc123",
-        "title": "Cannot save a Car",
-        "description": "Problem when clicking Save",
+        "title": "dsadadsds",
         "severity": 3,
-        "createdAt": 1542107359454,
-        "labels": ["critical", "need-CR", "dev-branch"]
+        "description": "dsadsads",
+        "labels": [
+            "dadsa",
+            "dsaads",
+            "dasads"
+        ],
+        "_id": "JIrNV",
+        "createdAt": 1730730637051,
+        "updatedAt": 1730730643831
     },
     {
         "_id": "def456",
@@ -13,7 +18,11 @@
         "description": "Blank screen when accessing dashboard",
         "severity": 2,
         "createdAt": 1542107459454,
-        "labels": ["frontend", "urgent", "UI-issue"]
+        "labels": [
+            "frontend",
+            "urgent",
+            "UI-issue"
+        ]
     },
     {
         "_id": "ghi789",
@@ -21,7 +30,11 @@
         "description": "User receives error message on login attempt",
         "severity": 1,
         "createdAt": 1542107559454,
-        "labels": ["authentication", "backend", "high-priority"]
+        "labels": [
+            "authentication",
+            "backend",
+            "high-priority"
+        ]
     },
     {
         "_id": "jkl012",
@@ -29,7 +42,11 @@
         "description": "Settings button does not respond to clicks",
         "severity": 2,
         "createdAt": 1542107659454,
-        "labels": ["UI", "minor", "needs-investigation"]
+        "labels": [
+            "UI",
+            "minor",
+            "needs-investigation"
+        ]
     },
     {
         "_id": "mno345",
@@ -37,7 +54,11 @@
         "description": "Validation error does not display on required fields",
         "severity": 2,
         "createdAt": 1542107759454,
-        "labels": ["validation", "frontend", "user-experience"]
+        "labels": [
+            "validation",
+            "frontend",
+            "user-experience"
+        ]
     },
     {
         "_id": "pqr678",
@@ -45,6 +66,10 @@
         "description": "User data does not sync across devices",
         "severity": 3,
         "createdAt": 1542107859454,
-        "labels": ["backend", "sync", "medium-priority"]
+        "labels": [
+            "backend",
+            "sync",
+            "medium-priority"
+        ]
     }
 ]

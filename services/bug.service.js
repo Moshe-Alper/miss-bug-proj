@@ -28,7 +28,6 @@ function query(filterBy = {}) {
     }
 
     return Promise.resolve(filteredBugs)
-    return Promise.resolve(filteredBugs)
 }
 
 function getById(bugId) {

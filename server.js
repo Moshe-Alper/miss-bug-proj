@@ -4,10 +4,13 @@ import EventEmitter from 'node:events'
 import { bugService } from './services/bug.service.js'
 import { loggerService } from './services/logger.service.js'
 const app = express()
-app.use(cookieParser())
 
 const eventBus = new EventEmitter()
+
+// Express Config
 app.use(express.static('public'))
+app.use(cookieParser())
+app.use(express.json())
 
 
 
@@ -24,18 +27,26 @@ app.get('/api/bug', (req, res) => {
         })
 })
 
-app.get('/api/bug/save', (req, res) => {
-    const bugToSave = {
-        _id: req.query._id || '',
-        title: req.query.title || '',
-        description: req.query.description || '',
-        severity: +req.query.severity || 0,
-    }
+app.post('/api/bug', (req, res) => {
+
+    const bugToSave =  req.body
+
     bugService.save(bugToSave)
         .then(savedBug => res.send(savedBug))
         .catch(err => {
-            loggerService.error('Cannot save bug:', err)
-            res.status(500).send('Cannot save bug')
+            loggerService.error('Cannot add bug:', err)
+            res.status(500).send('Cannot add bug')
+        })
+})
+
+app.put('/api/bug/:bugId', (req, res) => {
+    const bugToSave = req.body
+
+    bugService.save(bugToSave)
+        .then(savedBug => res.send(savedBug))
+        .catch(err => {
+            loggerService.error('Cannot update bug:', err)
+            res.status(500).send('Cannot update bug')
         })
 })
 
@@ -50,7 +61,7 @@ app.get('/api/bug/:bugId', trackVisitedBugs, (req, res) => {
         })
 })
 
-app.get('/api/bug/:bugId/remove', (req, res) => {
+app.delete('/api/bug/:bugId', (req, res) => {
     const { bugId } = req.params
     bugService.remove(bugId)
         .then(() => res.send(bugId + ' Removed Successfully!'))
