@@ -4,8 +4,8 @@ import EventEmitter from 'node:events'
 import PDFDocument from 'pdfkit-table'
 import fs from 'fs'
 
-// const STORAGE_KEY = 'bugDB'
-// _createBugs()
+const PAGE_SIZE = 5
+
 const bugs = utilService.readJsonFile('data/bugs.json')
 
 
@@ -26,8 +26,23 @@ function query(filterBy = {}) {
     if (filterBy.minSeverity) {
         filteredBugs = filteredBugs.filter((bug) => bug.severity >= filterBy.minSeverity)
     }
+    // TODO Add filter by labels
+
+    if (filterBy.pageIdx !== undefined) {
+        const startIdx = filterBy.pageIdx * PAGE_SIZE
+        filteredBugs = filteredBugs.slice(startIdx, startIdx + PAGE_SIZE)
+    }
+
+    getNextBug(filteredBugs)
 
     return Promise.resolve(filteredBugs)
+}
+
+function getNextBug(bugs){
+    bugs.forEach((bug,idx) => {
+      bug.prevId=bugs[idx-1]?bugs[idx-1]._id: bugs[bugs.length-1]._id 
+      bug.nextId=bugs[idx+1]?bugs[idx+1]._id:bugs[0]._id
+    })
 }
 
 function getById(bugId) {

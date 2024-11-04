@@ -3,7 +3,7 @@
         "_id": "abc123",
         "title": "Cannot save a Car",
         "description": "Problem when clicking Save",
-        "severity": 3,
+        "severity": 4,
         "createdAt": 1542107359454,
         "labels": ["critical", "need-CR", "dev-branch"]
     },
@@ -11,7 +11,7 @@
         "_id": "def456",
         "title": "Page does not load",
         "description": "Blank screen when accessing dashboard",
-        "severity": 2,
+        "severity": 5,
         "createdAt": 1542107459454,
         "labels": ["frontend", "urgent", "UI-issue"]
     },
@@ -19,7 +19,7 @@
         "_id": "ghi789",
         "title": "Error on login",
         "description": "User receives error message on login attempt",
-        "severity": 1,
+        "severity": 3,
         "createdAt": 1542107559454,
         "labels": ["authentication", "backend", "high-priority"]
     },
@@ -43,8 +43,80 @@
         "_id": "pqr678",
         "title": "Data sync issue",
         "description": "User data does not sync across devices",
-        "severity": 3,
+        "severity": 4,
         "createdAt": 1542107859454,
         "labels": ["backend", "sync", "medium-priority"]
+    },
+    {
+        "_id": "stu901",
+        "title": "Slow loading times",
+        "description": "Pages take too long to load.",
+        "severity": 3,
+        "createdAt": 1542107959454,
+        "labels": ["performance", "frontend"]
+    },
+    {
+        "_id": "vwx234",
+        "title": "Mobile view not responsive",
+        "description": "Site does not adjust for mobile devices.",
+        "severity": 4,
+        "createdAt": 1542108059454,
+        "labels": ["UI", "mobile", "critical"]
+    },
+    {
+        "_id": "yza567",
+        "title": "Email notifications not sent",
+        "description": "Users are not receiving email notifications.",
+        "severity": 3,
+        "createdAt": 1542108159454,
+        "labels": ["notifications", "email", "backend"]
+    },
+    {
+        "_id": "bcd890",
+        "title": "Data export feature broken",
+        "description": "Exporting data does not work.",
+        "severity": 4,
+        "createdAt": 1542108259454,
+        "labels": ["export", "backend", "high-priority"]
+    },
+    {
+        "_id": "efg123",
+        "title": "Inconsistent UI elements",
+        "description": "Different styles for the same elements.",
+        "severity": 2,
+        "createdAt": 1542108359454,
+        "labels": ["UI", "design", "minor"]
+    },
+    {
+        "_id": "hij456",
+        "title": "Crash on file upload",
+        "description": "App crashes when uploading large files.",
+        "severity": 5,
+        "createdAt": 1542108459454,
+        "labels": ["upload", "crash", "critical"]
+    },
+    {
+        "_id": "klm789",
+        "title": "Search function not returning results",
+        "description": "Search returns no results for valid queries.",
+        "severity": 3,
+        "createdAt": 1542108559454,
+        "labels": ["search", "functionality", "urgent"]
+    },
+    {
+        "_id": "nop012",
+        "title": "User permissions not applied",
+        "description": "Users have access to restricted areas.",
+        "severity": 4,
+        "createdAt": 1542108659454,
+        "labels": ["security", "permissions", "critical"]
+    },
+    {
+        "_id": "qrs345",
+        "title": "Browser compatibility issues",
+        "description": "Site does not function properly on certain browsers.",
+        "severity": 3,
+        "createdAt": 1542108759454,
+        "labels": ["compatibility", "browser", "medium-priority"]
     }
 ]

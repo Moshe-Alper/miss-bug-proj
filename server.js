@@ -17,7 +17,9 @@ app.use(express.json())
 app.get('/api/bug', (req, res) => {
     const filterBy = {
         txt: req.query.txt || '',
-        minSeverity: req.query.minSeverity || 0
+        minSeverity: req.query.minSeverity || 0,
+        // TODO Add filter by labels
+        pageIdx: req.query.pageIdx
     }
     bugService.query(filterBy)
         .then(bugs => res.send(bugs))
@@ -81,7 +83,6 @@ app.get('/pdf', (req, res) => {
 
     res.send('Downloading Pdf')
 })
-
 // Log in browser (temporary - will not be used later)
 app.get('/api/logs', (req, res) => {
     const path = process.cwd()
@@ -92,8 +93,6 @@ app.get('/api/logs', (req, res) => {
 eventBus.on('userExceededBugLimit', (visitedBugs) => {
     loggerService.error(`User reached visited bugs limit: ${visitedBugs}`)
 })
-
-
 
 function trackVisitedBugs(req, res, next) {
     const { bugId } = req.params
@@ -115,7 +114,6 @@ function trackVisitedBugs(req, res, next) {
     
     next()
 }
-
 const port = 3030
 app.listen(port, () =>
     loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
