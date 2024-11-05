@@ -1,3 +1,4 @@
+import path from 'path'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import EventEmitter from 'node:events'
@@ -31,7 +32,7 @@ app.get('/api/bug', (req, res) => {
 
 app.post('/api/bug', (req, res) => {
 
-    const bugToSave =  req.body
+    const bugToSave = req.body
 
     bugService.save(bugToSave)
         .then(savedBug => res.send(savedBug))
@@ -97,23 +98,28 @@ eventBus.on('userExceededBugLimit', (visitedBugs) => {
 function trackVisitedBugs(req, res, next) {
     const { bugId } = req.params
     let visitedBugs = req.cookies.visitedBugs || []
-    
+
     console.log('Visited Bugs:', visitedBugs)
-    
+
     if (!visitedBugs.includes(bugId)) {
         visitedBugs.push(bugId)
     }
-    
+
     if (visitedBugs.length > 3) {
         eventBus.emit('userExceededBugLimit', visitedBugs)
         return res.status(401).send('Wait for a bit')
     }
-    
+
     res.cookie('visitedBugs', visitedBugs, { maxAge: 7000 })
     res.cookie('lastVisitedBugId', bugId, { maxAge: 7000 })
-    
+
     next()
 }
+
+app.get('/**', (req, res) => {
+    res.sendFile(path.resolve('public/index.html'))
+})
+
 const port = 3030
 app.listen(port, () =>
     loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
