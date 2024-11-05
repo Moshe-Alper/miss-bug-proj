@@ -50,7 +50,8 @@ function getDefaultFilter() {
     return {
         txt: '',
         severity: 0,
-        labels: []
+        labels: [],
+        pageIdx: 0
     }
 }
 

@@ -159,7 +159,7 @@ nav a:hover {
 /* buttons */
 .action-btn {
     padding: 8px 12px;
-    font-size: 16px;
+    font-size: 1em;
     color: whitesmoke;
     background-color: lightskyblue;
     border: none;
@@ -201,3 +201,5 @@ nav a:hover {
     margin: 0 8px;
 
 }
+
+/* pagination */

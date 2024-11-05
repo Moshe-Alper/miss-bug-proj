@@ -9,7 +9,7 @@ export function BugIndex() {
     const [bugs, setBugs] = useState(null)
     const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
 
-    const availableLabels = ['frontend', 'urgent', 'UI-issue', 'backend', 'low-priority']
+    const availableLabels = ['critical', 'need-CR', 'dev-branch', 'frontend', 'urgent', 'UI-issue', 'backend', 'low-priority']
 
     useEffect(() => {
         loadBugs()
@@ -86,6 +86,10 @@ export function BugIndex() {
         setFilterBy(newFilter)
     }
 
+    function onChangePageIdx(diff) {
+        setFilterBy(prevFilter => ({ ...prevFilter, pageIdx: prevFilter.pageIdx + diff }))
+    }
+
     function onDownloadPdf() {
         window.open('/pdf', '_blank');
     }
@@ -116,6 +120,11 @@ export function BugIndex() {
                 />
             </section>
             <main>
+                <div className="pagination-section">
+                <button className='action-btn' onClick={() => { onChangePageIdx(1) }}>+</button>
+                {filterBy.pageIdx + 1 || ''}
+                <button className='action-btn' onClick={() => { onChangePageIdx(-1) }} disabled={filterBy.pageIdx === 0}>-</button>
+                </div>
                 <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
             </main>
         </main>
