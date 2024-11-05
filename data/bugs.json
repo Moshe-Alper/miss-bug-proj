@@ -1,11 +1,16 @@
 [
     {
-        "_id": "abc123",
-        "title": "Cannot save a Car",
-        "description": "Problem when clicking Save",
-        "severity": 4,
-        "createdAt": 1542107359454,
-        "labels": ["critical", "need-CR", "dev-branch"]
+        "title": "Page does not load",
+        "description": "Blank screen when accessing dashboard",
+        "severity": 5,
+        "labels": [
+            "frontend",
+            "urgent",
+            "UI-issue"
+        ],
+        "_id": "OGI17",
+        "createdAt": 1730810773041,
+        "updatedAt": 1730810773041
     },
     {
         "_id": "def456",
@@ -13,7 +18,13 @@
         "description": "Blank screen when accessing dashboard",
         "severity": 5,
         "createdAt": 1542107459454,
-        "labels": ["frontend", "urgent", "UI-issue"]
+        "labels": [
+            "frontend",
+            "urgent",
+            "UI-issue"
+        ],
+        "prevId": "qrs345",
+        "nextId": "ghi789"
     },
     {
         "_id": "ghi789",
@@ -21,7 +32,13 @@
         "description": "User receives error message on login attempt",
         "severity": 3,
         "createdAt": 1542107559454,
-        "labels": ["authentication", "backend", "high-priority"]
+        "labels": [
+            "authentication",
+            "backend",
+            "high-priority"
+        ],
+        "prevId": "def456",
+        "nextId": "jkl012"
     },
     {
         "_id": "jkl012",
@@ -29,7 +46,13 @@
         "description": "Settings button does not respond to clicks",
         "severity": 2,
         "createdAt": 1542107659454,
-        "labels": ["UI", "minor", "needs-investigation"]
+        "labels": [
+            "UI",
+            "minor",
+            "needs-investigation"
+        ],
+        "prevId": "ghi789",
+        "nextId": "mno345"
     },
     {
         "_id": "mno345",
@@ -37,7 +60,13 @@
         "description": "Validation error does not display on required fields",
         "severity": 2,
         "createdAt": 1542107759454,
-        "labels": ["validation", "frontend", "user-experience"]
+        "labels": [
+            "validation",
+            "frontend",
+            "user-experience"
+        ],
+        "prevId": "jkl012",
+        "nextId": "pqr678"
     },
     {
         "_id": "pqr678",
@@ -45,7 +74,13 @@
         "description": "User data does not sync across devices",
         "severity": 4,
         "createdAt": 1542107859454,
-        "labels": ["backend", "sync", "medium-priority"]
+        "labels": [
+            "backend",
+            "sync",
+            "medium-priority"
+        ],
+        "prevId": "mno345",
+        "nextId": "stu901"
     },
     {
         "_id": "stu901",
@@ -53,7 +88,12 @@
         "description": "Pages take too long to load.",
         "severity": 3,
         "createdAt": 1542107959454,
-        "labels": ["performance", "frontend"]
+        "labels": [
+            "performance",
+            "frontend"
+        ],
+        "prevId": "pqr678",
+        "nextId": "vwx234"
     },
     {
         "_id": "vwx234",
@@ -61,7 +101,13 @@
         "description": "Site does not adjust for mobile devices.",
         "severity": 4,
         "createdAt": 1542108059454,
-        "labels": ["UI", "mobile", "critical"]
+        "labels": [
+            "UI",
+            "mobile",
+            "critical"
+        ],
+        "prevId": "stu901",
+        "nextId": "yza567"
     },
     {
         "_id": "yza567",
@@ -69,7 +115,13 @@
         "description": "Users are not receiving email notifications.",
         "severity": 3,
         "createdAt": 1542108159454,
-        "labels": ["notifications", "email", "backend"]
+        "labels": [
+            "notifications",
+            "email",
+            "backend"
+        ],
+        "prevId": "vwx234",
+        "nextId": "bcd890"
     },
     {
         "_id": "bcd890",
@@ -77,7 +129,13 @@
         "description": "Exporting data does not work.",
         "severity": 4,
         "createdAt": 1542108259454,
-        "labels": ["export", "backend", "high-priority"]
+        "labels": [
+            "export",
+            "backend",
+            "high-priority"
+        ],
+        "prevId": "yza567",
+        "nextId": "efg123"
     },
     {
         "_id": "efg123",
@@ -85,7 +143,13 @@
         "description": "Different styles for the same elements.",
         "severity": 2,
         "createdAt": 1542108359454,
-        "labels": ["UI", "design", "minor"]
+        "labels": [
+            "UI",
+            "design",
+            "minor"
+        ],
+        "prevId": "bcd890",
+        "nextId": "hij456"
     },
     {
         "_id": "hij456",
@@ -93,7 +157,13 @@
         "description": "App crashes when uploading large files.",
         "severity": 5,
         "createdAt": 1542108459454,
-        "labels": ["upload", "crash", "critical"]
+        "labels": [
+            "upload",
+            "crash",
+            "critical"
+        ],
+        "prevId": "efg123",
+        "nextId": "klm789"
     },
     {
         "_id": "klm789",
@@ -101,7 +171,13 @@
         "description": "Search returns no results for valid queries.",
         "severity": 3,
         "createdAt": 1542108559454,
-        "labels": ["search", "functionality", "urgent"]
+        "labels": [
+            "search",
+            "functionality",
+            "urgent"
+        ],
+        "prevId": "hij456",
+        "nextId": "nop012"
     },
     {
         "_id": "nop012",
@@ -109,7 +185,13 @@
         "description": "Users have access to restricted areas.",
         "severity": 4,
         "createdAt": 1542108659454,
-        "labels": ["security", "permissions", "critical"]
+        "labels": [
+            "security",
+            "permissions",
+            "critical"
+        ],
+        "prevId": "klm789",
+        "nextId": "qrs345"
     },
     {
         "_id": "qrs345",
@@ -117,6 +199,12 @@
         "description": "Site does not function properly on certain browsers.",
         "severity": 3,
         "createdAt": 1542108759454,
-        "labels": ["compatibility", "browser", "medium-priority"]
+        "labels": [
+            "compatibility",
+            "browser",
+            "medium-priority"
+        ],
+        "prevId": "nop012",
+        "nextId": "def456"
     }
 ]

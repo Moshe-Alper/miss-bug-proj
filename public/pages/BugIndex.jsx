@@ -9,6 +9,8 @@ export function BugIndex() {
     const [bugs, setBugs] = useState(null)
     const [filterBy, setFilterBy] = useState(bugService.getDefaultFilter())
 
+    const availableLabels = ['frontend', 'urgent', 'UI-issue', 'backend', 'low-priority']
+
     useEffect(() => {
         loadBugs()
     }, [filterBy])
@@ -107,7 +109,11 @@ export function BugIndex() {
                 <h3>Bugs App</h3>
                 <button className='action-btn' onClick={onAddBug}>Add Bug ⛐</button>
                 <button className='action-btn' onClick={onDownloadPdf}>Download PDF</button>
-                <BugFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+                <BugFilter
+                    filterBy={filterBy}
+                    onSetFilterBy={onSetFilterBy}
+                    availableLabels={availableLabels}
+                />
             </section>
             <main>
                 <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />

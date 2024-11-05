@@ -12,13 +12,13 @@ app.use(express.static('public'))
 app.use(cookieParser())
 app.use(express.json())
 
-
+// TAILWIND
 
 app.get('/api/bug', (req, res) => {
     const filterBy = {
         txt: req.query.txt || '',
-        minSeverity: req.query.minSeverity || 0,
-        // TODO Add filter by labels
+        severity: req.query.severity || 0, //SEVERITY
+        labels: req.query.labels ? req.query.labels.split(',') : [],
         pageIdx: req.query.pageIdx
     }
     bugService.query(filterBy)

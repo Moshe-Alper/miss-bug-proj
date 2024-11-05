@@ -23,10 +23,15 @@ function query(filterBy = {}) {
         const regExp = new RegExp(filterBy.txt, 'i')
         filteredBugs = filteredBugs.filter((bug) => regExp.test(bug.title))
     }
-    if (filterBy.minSeverity) {
-        filteredBugs = filteredBugs.filter((bug) => bug.severity >= filterBy.minSeverity)
+    if (filterBy.severity) {
+        filteredBugs = filteredBugs.filter((bug) => bug.severity >= filterBy.severity)
     }
-    // TODO Add filter by labels
+
+    if (filterBy.labels) {
+        filteredBugs = filteredBugs.filter(bug =>
+            filterBy.labels.every(label => bug.labels.includes(label))
+        )
+    }
 
     if (filterBy.pageIdx !== undefined) {
         const startIdx = filterBy.pageIdx * PAGE_SIZE
@@ -38,10 +43,10 @@ function query(filterBy = {}) {
     return Promise.resolve(filteredBugs)
 }
 
-function getNextBug(bugs){
-    bugs.forEach((bug,idx) => {
-      bug.prevId=bugs[idx-1]?bugs[idx-1]._id: bugs[bugs.length-1]._id 
-      bug.nextId=bugs[idx+1]?bugs[idx+1]._id:bugs[0]._id
+function getNextBug(bugs) {
+    bugs.forEach((bug, idx) => {
+        bug.prevId = bugs[idx - 1] ? bugs[idx - 1]._id : bugs[bugs.length - 1]._id
+        bug.nextId = bugs[idx + 1] ? bugs[idx + 1]._id : bugs[0]._id
     })
 }
 
@@ -59,16 +64,35 @@ function remove(bugId) {
 }
 
 function save(bugToSave) {
+    const allowedKeys = ["title", "description", "severity", "createdAt", "labels"]
+
+    const filteredBug = allowedKeys.reduce((acc, current) => {
+        if (current in bugToSave) acc[current] = bugToSave[current]
+        return acc
+    }, {})
+
+    if (typeof filteredBug.title !== 'string') throw new Error('Title must be a string')
+    if (typeof filteredBug.description !== 'string') throw new Error('Description must be a string')
+    if (typeof filteredBug.severity !== 'number') throw new Error('Severity must be a number')
+    if (!Array.isArray(filteredBug.labels)) throw new Error('Labels must be an array')
+
     if (bugToSave._id) {
         const bugIdx = bugs.findIndex(bug => bug._id === bugToSave._id)
-        bugToSave = { ...bugs[bugIdx], ...bugToSave, updatedAt: Date.now() }
-        bugs[bugIdx] = bugToSave
+        filteredBug._id = bugToSave._id
+        filteredBug.updatedAt = Date.now()
+        bugs[bugIdx] = { ...bugs[bugIdx], ...filteredBug }
     } else {
-        bugToSave._id = utilService.makeId()
-        bugToSave.createdAt = Date.now()
-        bugs.unshift(bugToSave)
+        const newBug = {
+            ...getEmptyBug(),
+            ...filteredBug,
+            _id: utilService.makeId(),
+            createdAt: Date.now(),
+            updatedAt: Date.now()
+        }
+        bugs.unshift(newBug)
     }
-    return _saveBugsToFile().then(() => bugToSave)
+
+    return _saveBugsToFile().then(() => filteredBug)
 }
 
 function _saveBugsToFile() {
@@ -102,4 +126,16 @@ function generatePdfStream() {
     return doc.table(table)
         .then(() => { doc.end() })
         .catch((err) => { })
+}
+
+function getEmptyBug() {
+    return {
+        title: "",
+        description: "",
+        severity: 0,
+        labels: [],
+        _id: "",
+        createdAt: null,
+        updatedAt: null
+    };
 }
