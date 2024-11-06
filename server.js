@@ -4,6 +4,8 @@ import cookieParser from 'cookie-parser'
 import EventEmitter from 'node:events'
 import { bugService } from './services/bug.service.js'
 import { loggerService } from './services/logger.service.js'
+import { pdfService } from './services/pdf.service.js'
+
 const app = express()
 
 const eventBus = new EventEmitter()
@@ -12,8 +14,6 @@ const eventBus = new EventEmitter()
 app.use(express.static('public'))
 app.use(cookieParser())
 app.use(express.json())
-
-// TAILWIND
 
 app.get('/api/bug', (req, res) => {
     const filterBy = {
@@ -76,14 +76,30 @@ app.delete('/api/bug/:bugId', (req, res) => {
 
 // Get a pdf file
 app.get('/pdf', (req, res) => {
-    const path = './pdfs/test.pdf'
-    bugService.generatePdfStream().then(() => {
-        console.log('PDF ready')
-    })
-    // res.download(path, 'modPdf.pdf')
+    const path = './pdfs/'
+    console.log('in pdf')
 
-    res.send('Downloading Pdf')
+    bugService.query().then(bugs => {
+        bugs.sort((a, b) => b.createdAt - a.createdAt)
+        const rows = bugs.map(({ title, description, severity }) => [title, description, severity])
+        const headers = ['Title', 'Description', 'Severity']
+
+        const fileName = 'bugs'
+        pdfService.createPdf({ headers, rows, title: 'Bugs report', fileName }).then(() => {
+            res.setHeader('Content-Type', 'application/pdf');
+            res.sendFile(`${process.cwd()}/pdfs/${fileName}.pdf`)
+
+   
+        }).catch((err) => {
+
+            console.error(err);
+            loggerService.error('Cannot download Pdf', err)
+            res.send('We have a problem, try again soon')
+        })
+    })
+    // res.send('Downloading pdf')
 })
+
 // Log in browser (temporary - will not be used later)
 app.get('/api/logs', (req, res) => {
     const path = process.cwd()

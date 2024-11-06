@@ -70,7 +70,7 @@ function save(bugToSave) {
         if (current in bugToSave) acc[current] = bugToSave[current]
         return acc
     }, {})
-
+    // typescript
     if (typeof filteredBug.title !== 'string') throw new Error('Title must be a string')
     if (typeof filteredBug.description !== 'string') throw new Error('Description must be a string')
     if (typeof filteredBug.severity !== 'number') throw new Error('Severity must be a number')
@@ -137,5 +137,5 @@ function getEmptyBug() {
         _id: "",
         createdAt: null,
         updatedAt: null
-    };
+    }
 }
