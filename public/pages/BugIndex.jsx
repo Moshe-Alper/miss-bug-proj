@@ -2,6 +2,7 @@ import { bugService } from '../services/bug.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { BugList } from '../cmps/BugList.jsx'
 import { BugFilter } from '../cmps/BugFilter.jsx'
+import { BugSort } from '../cmps/BugSort.jsx'
 
 const { useState, useEffect } = React
 
@@ -86,6 +87,13 @@ export function BugIndex() {
         setFilterBy(newFilter)
     }
 
+    function onSetSort(sortBy) {
+        setFilterBy(prevFilter => ({
+            ...prevFilter,
+            sortBy: { ...prevFilter.sortBy, ...sortBy }
+        }))
+    }
+
     function onChangePageIdx(diff) {
         setFilterBy(prevFilter => ({ ...prevFilter, pageIdx: prevFilter.pageIdx + diff }))
     }
@@ -118,12 +126,17 @@ export function BugIndex() {
                     onSetFilterBy={onSetFilterBy}
                     availableLabels={availableLabels}
                 />
+                <BugSort
+                    onSetSort={onSetSort}
+                    sortBy={{ ...filterBy.sortBy }}
+                />
+
             </section>
             <main>
                 <div className="pagination-section">
-                <button className='action-btn' onClick={() => { onChangePageIdx(1) }}>+</button>
-                {filterBy.pageIdx + 1 || ''}
-                <button className='action-btn' onClick={() => { onChangePageIdx(-1) }} disabled={filterBy.pageIdx === 0}>-</button>
+                    <button className='action-btn' onClick={() => { onChangePageIdx(1) }}>+</button>
+                    {filterBy.pageIdx + 1 || ''}
+                    <button className='action-btn' onClick={() => { onChangePageIdx(-1) }} disabled={filterBy.pageIdx === 0}>-</button>
                 </div>
                 <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
             </main>

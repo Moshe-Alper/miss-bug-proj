@@ -14,7 +14,6 @@ export const bugService = {
     getById,
     remove,
     save,
-    generatePdfStream,
 }
 
 function query(filterBy = {}) {
@@ -33,6 +32,19 @@ function query(filterBy = {}) {
         )
     }
 
+     // sort
+     const sortBy = filterBy.sortBy
+     if (sortBy.type === 'title') {
+         filteredBugs.sort((b1, b2) => (sortBy.desc) * (b1.title.localeCompare(b2.title)))
+     }
+     if (sortBy.type === 'createdAt') {
+         filteredBugs.sort((b1, b2) => (sortBy.desc) * (b1.createdAt - b2.createdAt))
+     }
+     if (sortBy.type === 'severity') {
+         filteredBugs.sort((b1, b2) => (sortBy.desc) * (b1.severity - b2.severity))
+     }
+ 
+    // Pagination
     if (filterBy.pageIdx !== undefined) {
         const startIdx = filterBy.pageIdx * PAGE_SIZE
         filteredBugs = filteredBugs.slice(startIdx, startIdx + PAGE_SIZE)
@@ -107,26 +119,26 @@ function _saveBugsToFile() {
     })
 }
 
-function generatePdfStream() {
-    const doc = new PDFDocument({ margin: 30, size: 'A4' })
-    doc.pipe(fs.createWriteStream('./doc.pdf'))
-    const sortedBugs = bugs.sort((a, b) => b.createdAt - a.createdAt)
-    const tableRows = sortedBugs.map(({ title, description: description, severity }) => [title, description, severity])
+// function generatePdfStream() {
+//     const doc = new PDFDocument({ margin: 30, size: 'A4' })
+//     doc.pipe(fs.createWriteStream('./doc.pdf'))
+//     const sortedBugs = bugs.sort((a, b) => b.createdAt - a.createdAt)
+//     const tableRows = sortedBugs.map(({ title, description: description, severity }) => [title, description, severity])
 
-    const table = {
-        title: 'Bugs Report',
-        subtitle: 'Sorted by Creation Time',
-        headers: [
-            { label: 'Title', property: 'title', width: 100, padding: [0, 0, 0, 10] },
-            { label: 'Description', property: 'description', width: 200, padding: [0, 0, 0, 10] },
-            { label: 'Severity', property: 'severity', width: 50, padding: [0, 0, 0, 10] }
-        ],
-        rows: tableRows
-    }
-    return doc.table(table)
-        .then(() => { doc.end() })
-        .catch((err) => { })
-}
+//     const table = {
+//         title: 'Bugs Report',
+//         subtitle: 'Sorted by Creation Time',
+//         headers: [
+//             { label: 'Title', property: 'title', width: 100, padding: [0, 0, 0, 10] },
+//             { label: 'Description', property: 'description', width: 200, padding: [0, 0, 0, 10] },
+//             { label: 'Severity', property: 'severity', width: 50, padding: [0, 0, 0, 10] }
+//         ],
+//         rows: tableRows
+//     }
+//     return doc.table(table)
+//         .then(() => { doc.end() })
+//         .catch((err) => { })
+// }
 
 function getEmptyBug() {
     return {

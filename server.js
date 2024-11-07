@@ -20,8 +20,9 @@ app.get('/api/bug', (req, res) => {
         txt: req.query.txt || '',
         severity: req.query.severity || 0, //SEVERITY
         labels: Array.isArray(req.query.labels) ? req.query.labels : [],
-        pageIdx: req.query.pageIdx
     }
+    if (req.query.pageIdx) filterBy.pageIdx = req.query.pageIdx
+    if (req.query.sortBy) filterBy.sortBy = JSON.parse(req.query.sortBy)
     bugService.query(filterBy)
         .then(bugs => res.send(bugs))
         .catch(err => {
@@ -89,7 +90,7 @@ app.get('/pdf', (req, res) => {
             res.setHeader('Content-Type', 'application/pdf');
             res.sendFile(`${process.cwd()}/pdfs/${fileName}.pdf`)
 
-   
+
         }).catch((err) => {
 
             console.error(err);

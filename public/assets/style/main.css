@@ -202,4 +202,16 @@ nav a:hover {
 
 }
 
-/* pagination */
+/* sorting */
+
+.bug-sort {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

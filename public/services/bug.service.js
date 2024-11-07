@@ -51,7 +51,8 @@ function getDefaultFilter() {
         txt: '',
         severity: 0,
         labels: [],
-        pageIdx: 0
+        pageIdx: 0,
+        sortBy: { type: 'title', desc: 1 }
     }
 }
 
