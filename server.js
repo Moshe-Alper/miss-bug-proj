@@ -36,10 +36,12 @@ app.get('/api/bug', (req, res) => {
 })
 
 app.post('/api/bug', (req, res) => {
+    const user = userService.validateToken(req.cookies.loginToken)
+    if (!user) return res.status(401).send('Unauthenticated')
 
     const bugToSave = req.body
 
-    bugService.save(bugToSave)
+    bugService.save(bugToSave, user)
         .then(savedBug => res.send(savedBug))
         .catch(err => {
             loggerService.error('Cannot add bug:', err)
@@ -48,9 +50,12 @@ app.post('/api/bug', (req, res) => {
 })
 
 app.put('/api/bug/:bugId', (req, res) => {
+    const user = userService.validateToken(req.cookies.loginToken)
+    if (!user) return res.status(401).send('Unauthenticated')
+
     const bugToSave = req.body
 
-    bugService.save(bugToSave)
+    bugService.save(bugToSave, user)
         .then(savedBug => res.send(savedBug))
         .catch(err => {
             loggerService.error('Cannot update bug:', err)
@@ -70,8 +75,11 @@ app.get('/api/bug/:bugId', trackVisitedBugs, (req, res) => {
 })
 
 app.delete('/api/bug/:bugId', (req, res) => {
+    const user = userService.validateToken(req.cookies.loginToken)
+    if (!user) return res.status(401).send('Unauthenticated')
+
     const { bugId } = req.params
-    bugService.remove(bugId)
+    bugService.remove(bugId, user)
         .then(() => res.send(bugId + ' Removed Successfully!'))
         .catch(err => {
             loggerService.error('Cannot remove bug', err)
@@ -99,6 +107,43 @@ app.get('/api/user/:userId', (req, res) => {
             res.status(400).send('Cannot load user')
         })
 })
+
+// Auth API
+app.post('/api/auth/login', (req, res) => {
+    const credentials = req.body
+
+    userService.checkLogin(credentials)
+        .then(user => {
+            if (user) {
+                const loginToken = userService.getLoginToken(user)
+                res.cookie('loginToken', loginToken)
+                res.send(user)
+            } else {
+                res.status(404).send('Invalid Credentials')
+            }
+        })
+})
+
+app.post('/api/auth/signup', (req, res) => {
+    const credentials = req.body
+    
+    userService.save(credentials)
+        .then(user => {
+            if (user) {
+                const loginToken = userService.getLoginToken(user)
+                res.cookie('loginToken', loginToken)
+                res.send(user)
+            } else {
+                res.status(400).send('Cannot signup')
+            }
+        })
+})
+
+app.post('/api/auth/logout', (req, res) => {
+    res.clearCookie('loginToken')
+    res.send('logged-out!')
+})
+
 
 // Get a pdf file
 app.get('/pdf', (req, res) => {
@@ -158,6 +203,7 @@ function trackVisitedBugs(req, res, next) {
     next()
 }
 
+// Fallback route
 app.get('/**', (req, res) => {
     res.sendFile(path.resolve('public/index.html'))
 })

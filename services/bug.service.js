@@ -33,16 +33,17 @@ function query(filterBy = {}) {
     }
 
      // sort
-     const sortBy = filterBy.sortBy
-     if (sortBy.type === 'title') {
-         filteredBugs.sort((b1, b2) => (sortBy.desc) * (b1.title.localeCompare(b2.title)))
-     }
-     if (sortBy.type === 'createdAt') {
-         filteredBugs.sort((b1, b2) => (sortBy.desc) * (b1.createdAt - b2.createdAt))
-     }
-     if (sortBy.type === 'severity') {
-         filteredBugs.sort((b1, b2) => (sortBy.desc) * (b1.severity - b2.severity))
-     }
+     const sortBy = filterBy.sortBy || {}
+     const { type, desc = 1 } = sortBy
+     if (type === 'title') {
+        filteredBugs.sort((b1, b2) => desc * (b1.title.localeCompare(b2.title)))
+    }
+    if (type === 'createdAt') {
+        filteredBugs.sort((b1, b2) => desc * (b1.createdAt - b2.createdAt))
+    }
+    if (type === 'severity') {
+        filteredBugs.sort((b1, b2) => desc * (b1.severity - b2.severity))
+    }
  
     // Pagination
     if (filterBy.pageIdx !== undefined) {
@@ -68,25 +69,35 @@ function getById(bugId) {
     return Promise.resolve(bug)
 }
 
-function remove(bugId) {
+function remove(bugId, user) {
+    console.log('user:', user)
     const bugIdx = bugs.findIndex(bug => bug._id === bugId)
     if (bugIdx < 0) return Promise.reject('Cannot find bug - ' + bugId)
     bugs.splice(bugIdx, 1)
     return _saveBugsToFile()
 }
 
-function save(bugToSave) {
+function save(bugToSave, user) {
+    console.log('user:', user)
     const allowedKeys = ["title", "description", "severity", "createdAt", "labels"]
 
     const filteredBug = allowedKeys.reduce((acc, current) => {
         if (current in bugToSave) acc[current] = bugToSave[current]
         return acc
     }, {})
-    // typescript
+    // typescript - in a later date
     if (typeof filteredBug.title !== 'string') throw new Error('Title must be a string')
     if (typeof filteredBug.description !== 'string') throw new Error('Description must be a string')
     if (typeof filteredBug.severity !== 'number') throw new Error('Severity must be a number')
-    if (!Array.isArray(filteredBug.labels)) throw new Error('Labels must be an array')
+    
+
+    if (!Array.isArray(filteredBug.labels)) {
+            if (filteredBug.labels === undefined) {
+                filteredBug.labels = []
+            } else {
+                throw new Error('Labels must be an array')
+            }
+        }
 
     if (bugToSave._id) {
         const bugIdx = bugs.findIndex(bug => bug._id === bugToSave._id)

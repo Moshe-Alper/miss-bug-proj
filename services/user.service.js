@@ -54,8 +54,7 @@ function save(user) {
 function checkLogin({ username, password }) {
     // You might want to remove the password validation for dev
 	var user = users.find(user => user.username === username 
-		// && user.password === password
-	)
+		&& user.password === password)
 	if (user) {
 		user = {
 			_id: user._id,
