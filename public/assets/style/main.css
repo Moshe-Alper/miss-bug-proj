@@ -104,9 +104,6 @@ nav a:hover {
     color: gold;
 }
 
-.info-actions {
-}
-
 .container {
     padding-inline: 8rem;
 }
@@ -168,7 +165,7 @@ nav a:hover {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.action-btn:hover {
+.action-btn:not([disabled]):hover {
     background-color: #87ceeb;
     transform: translateY(-2px); 
 }
@@ -181,6 +178,10 @@ nav a:hover {
     margin: 0 8px; 
 }
 
+.action-btn[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed
+ }
 
 /* labels */
 .bug-labels {

@@ -63,10 +63,9 @@ export function BugIndex() {
     }
 
     function onEditBug(bug) {
-        const title = prompt('New Title?')
-        const severity = +prompt('New severity?')
-        const description = prompt('Edit description')
-        const bugToSave = { ...bug, title, severity, description }
+        const title = prompt('New Title?', bug.title)
+        const severity = +prompt('New severity?', bug.severity)
+        const bugToSave = { ...bug, title, severity }
         bugService
             .save(bugToSave)
             .then((savedBug) => {
@@ -95,7 +94,9 @@ export function BugIndex() {
     }
 
     function onChangePageIdx(diff) {
-        setFilterBy(prevFilter => ({ ...prevFilter, pageIdx: prevFilter.pageIdx + diff }))
+        setFilterBy(prevFilter => ({ 
+            ...prevFilter,
+             pageIdx: prevFilter.pageIdx + diff < 0 ? 0 : prevFilter.pageIdx  + diff}))
     }
 
     function onDownloadPdf() {
@@ -122,7 +123,7 @@ export function BugIndex() {
                 <button className='action-btn' onClick={onAddBug}>Add Bug ⛐</button>
                 <button className='action-btn' onClick={onDownloadPdf}>Download PDF</button>
                 <BugFilter
-                    filterBy={filterBy}
+                    filterBy={{ ...filterBy}}
                     onSetFilterBy={onSetFilterBy}
                     availableLabels={availableLabels}
                 />
@@ -134,9 +135,9 @@ export function BugIndex() {
             </section>
             <main>
                 <div className="pagination-section">
-                    <button className='action-btn' onClick={() => { onChangePageIdx(1) }}>+</button>
+                    <button className='action-btn' onClick={() => { onChangePageIdx(-1) }} disabled={filterBy.pageIdx >= 0}>Previous</button>
                     {filterBy.pageIdx + 1 || ''}
-                    <button className='action-btn' onClick={() => { onChangePageIdx(-1) }} disabled={filterBy.pageIdx === 0}>-</button>
+                    <button className='action-btn' onClick={() => { onChangePageIdx(1) }}>Next</button>
                 </div>
                 <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
             </main>

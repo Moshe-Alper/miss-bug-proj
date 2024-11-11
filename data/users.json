@@ -1,0 +1,34 @@
+[
+    {
+      "_id": "u102",
+      "username": "bellcorgan",
+      "fullname": "Bell Corgan",
+      "password": "123",
+      "score": 85,
+      "isAdmin": false
+    },
+    {
+      "_id": "u103",
+      "username": "wilsonsharp",
+      "fullname": "Wilson Sharp",
+      "password": "123",
+      "score": 95,
+      "isAdmin": false
+    },
+    {
+      "_id": "u104",
+      "username": "shrinerst",
+      "fullname": "Shriner Staley",
+      "password": "123",
+      "score": 90,
+      "isAdmin": false
+    },
+    {
+      "_id": "u105",
+      "username": "cuomovedder",
+      "fullname": "Cuomo Vedder",
+      "password": "123",
+      "score": 110,
+      "isAdmin": false
+    }
+  ]
