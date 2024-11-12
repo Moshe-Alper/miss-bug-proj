@@ -6,7 +6,7 @@
         "severity": 1,
         "createdAt": 1542107359454,
         "labels": ["critical", "need-CR", "dev-branch"],
-        "creator": {
+        "owner": {
             "_id": "u102",
             "fullname": "Bell Corgan"
         }
@@ -18,7 +18,7 @@
         "severity": 5,
         "createdAt": 1542107459454,
         "labels": ["frontend", "urgent", "UI-issue"],
-        "creator": {
+        "owner": {
             "_id": "u101",
             "fullname": "Bell Vedder"
         }
@@ -30,7 +30,7 @@
         "severity": 3,
         "createdAt": 1542107559454,
         "labels": ["authentication", "backend", "high-priority"],
-        "creator": {
+        "owner": {
             "_id": "u103",
             "fullname": "Wilson Sharp"
         }
@@ -42,7 +42,7 @@
         "severity": 2,
         "createdAt": 1542107659454,
         "labels": ["UI", "minor", "needs-investigation"],
-        "creator": {
+        "owner": {
             "_id": "u102",
             "fullname": "Bell Corgan"
         }
@@ -54,7 +54,7 @@
         "severity": 2,
         "createdAt": 1542107759454,
         "labels": ["validation", "frontend", "user-experience"],
-        "creator": {
+        "owner": {
             "_id": "u103",
             "fullname": "Wilson Sharp"
         }
@@ -66,7 +66,7 @@
         "severity": 4,
         "createdAt": 1542107859454,
         "labels": ["backend", "sync", "medium-priority"],
-        "creator": {
+        "owner": {
             "_id": "u101",
             "fullname": "Bell Vedder"
         }
@@ -78,7 +78,7 @@
         "severity": 1,
         "createdAt": 1542107959454,
         "labels": ["performance", "frontend"],
-        "creator": {
+        "owner": {
             "_id": "u102",
             "fullname": "Bell Corgan"
         }
@@ -90,7 +90,7 @@
         "severity": 4,
         "createdAt": 1542108059454,
         "labels": ["UI", "mobile", "critical"],
-        "creator": {
+        "owner": {
             "_id": "u103",
             "fullname": "Wilson Sharp"
         }
@@ -102,7 +102,7 @@
         "severity": 3,
         "createdAt": 1542108159454,
         "labels": ["notifications", "email", "backend"],
-        "creator": {
+        "owner": {
             "_id": "u101",
             "fullname": "Bell Vedder"
         }
@@ -114,7 +114,7 @@
         "severity": 4,
         "createdAt": 1542108259454,
         "labels": ["export", "backend", "high-priority"],
-        "creator": {
+        "owner": {
             "_id": "u102",
             "fullname": "Bell Corgan"
         }
@@ -126,7 +126,7 @@
         "severity": 2,
         "createdAt": 1542108359454,
         "labels": ["UI", "design", "minor"],
-        "creator": {
+        "owner": {
             "_id": "u103",
             "fullname": "Wilson Sharp"
         }
@@ -138,7 +138,7 @@
         "severity": 5,
         "createdAt": 1542108459454,
         "labels": ["upload", "crash", "critical"],
-        "creator": {
+        "owner": {
             "_id": "u101",
             "fullname": "Bell Vedder"
         }
@@ -150,7 +150,7 @@
         "severity": 3,
         "createdAt": 1542108559454,
         "labels": ["search", "functionality", "urgent"],
-        "creator": {
+        "owner": {
             "_id": "u102",
             "fullname": "Bell Corgan"
         }
@@ -162,7 +162,7 @@
         "severity": 4,
         "createdAt": 1542108659454,
         "labels": ["security", "permissions", "critical"],
-        "creator": {
+        "owner": {
             "_id": "u103",
             "fullname": "Wilson Sharp"
         }
@@ -174,7 +174,7 @@
         "severity": 3,
         "createdAt": 1542108759454,
         "labels": ["compatibility", "browser", "medium-priority"],
-        "creator": {
+        "owner": {
             "_id": "u101",
             "fullname": "Bell Vedder"
         }

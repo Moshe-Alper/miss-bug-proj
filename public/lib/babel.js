@@ -29426,15 +29426,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return names;
 	};
 
-	function defaultCreatorFn(object) {
+	function defaultownerFn(object) {
 	  return create(null);
 	}
 
-	function makeAccessor(secretCreatorFn) {
+	function makeAccessor(secretownerFn) {
 	  var brand = makeUniqueKey();
 	  var passkey = create(null);
 
-	  secretCreatorFn = secretCreatorFn || defaultCreatorFn;
+	  secretownerFn = secretownerFn || defaultownerFn;
 
 	  function register(object) {
 	    var secret; // Created lazily.
@@ -29443,7 +29443,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Only code that has access to the passkey can retrieve (or forget)
 	      // the secret object.
 	      if (key === passkey) {
-	        return forget ? secret = null : secret || (secret = secretCreatorFn(object));
+	        return forget ? secret = null : secret || (secret = secretownerFn(object));
 	      }
 	    }
 

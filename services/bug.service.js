@@ -75,15 +75,13 @@ function remove(bugId, user) {
     const bugIdx = bugs.findIndex(bug => bug._id === bugId)
 
     if (bugIdx < 0) return Promise.reject('Cannot find bug - ' + bugId)
-    if (!user.isAdmin && bugs[bugIdx].creator._id !== user._id) return Promise.reject('Not your bug')
+    if (!user.isAdmin && bugs[bugIdx].owner._id !== user._id) return Promise.reject('Not your bug')
 
     bugs.splice(bugIdx, 1)
     return _saveBugsToFile()
 }
 
 function save(bugToSave, user) {
-
-    if (!user.isAdmin && bugToSave[idx].creator._id !== user._id) return Promise.reject('Not your Bug')
 
     const allowedKeys = ["title", "description", "severity", "createdAt", "labels"]
 
@@ -106,6 +104,9 @@ function save(bugToSave, user) {
         }
 
     if (bugToSave._id) {
+        if (!user.isAdmin && bugToSave.owner._id !== user._id) return Promise.reject('Not your bug')
+
+
         const bugIdx = bugs.findIndex(bug => bug._id === bugToSave._id)
         filteredBug._id = bugToSave._id
         filteredBug.updatedAt = Date.now()
@@ -117,7 +118,7 @@ function save(bugToSave, user) {
             _id: utilService.makeId(),
             createdAt: Date.now(),
             updatedAt: Date.now(),
-            creator: user
+            owner: user
         }
         bugs.unshift(newBug)
     }
@@ -166,6 +167,7 @@ function getEmptyBug() {
         labels: [],
         _id: "",
         createdAt: null,
-        updatedAt: null
+        updatedAt: null,
+        owner: null
     }
 }
