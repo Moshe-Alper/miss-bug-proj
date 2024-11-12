@@ -144,7 +144,6 @@ app.post('/api/auth/logout', (req, res) => {
     res.send('logged-out!')
 })
 
-
 // Get a pdf file
 app.get('/pdf', (req, res) => {
     const path = './pdfs/'

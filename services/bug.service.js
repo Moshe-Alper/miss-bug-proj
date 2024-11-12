@@ -32,7 +32,8 @@ function query(filterBy = {}) {
         )
     }
 
-     // sort
+     // Sorting
+    //  TODO getEmptyFilter - in front
      const sortBy = filterBy.sortBy || {}
      const { type, desc = 1 } = sortBy
      if (type === 'title') {
@@ -72,13 +73,19 @@ function getById(bugId) {
 function remove(bugId, user) {
     console.log('user:', user)
     const bugIdx = bugs.findIndex(bug => bug._id === bugId)
+
     if (bugIdx < 0) return Promise.reject('Cannot find bug - ' + bugId)
+    if (!user.isAdmin && cars[idx].owner._id !== user._id) return Promise.reject('Not your bug')
+
     bugs.splice(bugIdx, 1)
     return _saveBugsToFile()
 }
 
 function save(bugToSave, user) {
     console.log('user:', user)
+
+    if (!user.isAdmin && cars[idx].owner._id !== user._id) return Promise.reject('Not your Bug')
+
     const allowedKeys = ["title", "description", "severity", "createdAt", "labels"]
 
     const filteredBug = allowedKeys.reduce((acc, current) => {
@@ -110,7 +117,8 @@ function save(bugToSave, user) {
             ...filteredBug,
             _id: utilService.makeId(),
             createdAt: Date.now(),
-            updatedAt: Date.now()
+            updatedAt: Date.now(),
+            owner: user
         }
         bugs.unshift(newBug)
     }
