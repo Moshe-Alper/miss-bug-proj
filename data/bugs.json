@@ -1,23 +1,5 @@
 [
     {
-        "_id": "ghi789",
-        "title": "Error on login",
-        "description": "User receives error message on login attempt",
-        "severity": 3,
-        "createdAt": 1542107559454,
-        "labels": [
-            "authentication",
-            "backend",
-            "high-priority"
-        ],
-        "creator": {
-            "_id": "u103",
-            "fullname": "Wilson Sharp"
-        },
-        "prevId": "def456",
-        "nextId": "jkl012"
-    },
-    {
         "_id": "jkl012",
         "title": "Button not responsive",
         "description": "Settings button does not respond to clicks",
@@ -32,26 +14,8 @@
             "_id": "u102",
             "fullname": "Bell Corgan"
         },
-        "prevId": "ghi789",
-        "nextId": "mno345"
-    },
-    {
-        "_id": "mno345",
-        "title": "Form validation error",
-        "description": "Validation error does not display on required fields",
-        "severity": 2,
-        "createdAt": 1542107759454,
-        "labels": [
-            "validation",
-            "frontend",
-            "user-experience"
-        ],
-        "creator": {
-            "_id": "u103",
-            "fullname": "Wilson Sharp"
-        },
-        "prevId": "jkl012",
-        "nextId": "pqr678"
+        "prevId": "qrs345",
+        "nextId": "hij456"
     },
     {
         "_id": "pqr678",
@@ -68,8 +32,8 @@
             "_id": "u101",
             "fullname": "Bell Vedder"
         },
-        "prevId": "mno345",
-        "nextId": "stu901"
+        "prevId": "bcd890",
+        "nextId": "qrs345"
     },
     {
         "_id": "stu901",
@@ -89,24 +53,6 @@
         "nextId": "vwx234"
     },
     {
-        "_id": "vwx234",
-        "title": "Mobile view not responsive",
-        "description": "Site does not adjust for mobile devices.",
-        "severity": 4,
-        "createdAt": 1542108059454,
-        "labels": [
-            "UI",
-            "mobile",
-            "critical"
-        ],
-        "creator": {
-            "_id": "u103",
-            "fullname": "Wilson Sharp"
-        },
-        "prevId": "stu901",
-        "nextId": "yza567"
-    },
-    {
         "_id": "yza567",
         "title": "Email notifications not sent",
         "description": "Users are not receiving email notifications.",
@@ -122,7 +68,7 @@
             "fullname": "Bell Vedder"
         },
         "prevId": "vwx234",
-        "nextId": "bcd890"
+        "nextId": "ghi789"
     },
     {
         "_id": "bcd890",
@@ -139,26 +85,8 @@
             "_id": "u102",
             "fullname": "Bell Corgan"
         },
-        "prevId": "yza567",
-        "nextId": "efg123"
-    },
-    {
-        "_id": "efg123",
-        "title": "Inconsistent UI elements",
-        "description": "Different styles for the same elements.",
-        "severity": 2,
-        "createdAt": 1542108359454,
-        "labels": [
-            "UI",
-            "design",
-            "minor"
-        ],
-        "creator": {
-            "_id": "u103",
-            "fullname": "Wilson Sharp"
-        },
-        "prevId": "bcd890",
-        "nextId": "hij456"
+        "prevId": "hij456",
+        "nextId": "pqr678"
     },
     {
         "_id": "hij456",
@@ -175,8 +103,8 @@
             "_id": "u101",
             "fullname": "Bell Vedder"
         },
-        "prevId": "efg123",
-        "nextId": "klm789"
+        "prevId": "jkl012",
+        "nextId": "bcd890"
     },
     {
         "_id": "klm789",
@@ -229,7 +157,7 @@
             "_id": "u101",
             "fullname": "Bell Vedder"
         },
-        "prevId": "nop012",
-        "nextId": "abc123"
+        "prevId": "pqr678",
+        "nextId": "jkl012"
     }
 ]

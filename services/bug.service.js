@@ -75,16 +75,15 @@ function remove(bugId, user) {
     const bugIdx = bugs.findIndex(bug => bug._id === bugId)
 
     if (bugIdx < 0) return Promise.reject('Cannot find bug - ' + bugId)
-    if (!user.isAdmin && cars[idx].owner._id !== user._id) return Promise.reject('Not your bug')
+    if (!user.isAdmin && bugs[bugIdx].creator._id !== user._id) return Promise.reject('Not your bug')
 
     bugs.splice(bugIdx, 1)
     return _saveBugsToFile()
 }
 
 function save(bugToSave, user) {
-    console.log('user:', user)
 
-    if (!user.isAdmin && cars[idx].owner._id !== user._id) return Promise.reject('Not your Bug')
+    if (!user.isAdmin && bugToSave[idx].creator._id !== user._id) return Promise.reject('Not your Bug')
 
     const allowedKeys = ["title", "description", "severity", "createdAt", "labels"]
 
@@ -118,7 +117,7 @@ function save(bugToSave, user) {
             _id: utilService.makeId(),
             createdAt: Date.now(),
             updatedAt: Date.now(),
-            owner: user
+            creator: user
         }
         bugs.unshift(newBug)
     }
