@@ -203,8 +203,7 @@ nav a:hover {
 
 }
 
-/* sorting */
-
+/* Sorting */
 .bug-sort {
     display: flex;
     align-items: center;
@@ -213,12 +212,10 @@ nav a:hover {
     padding: 10px;
     background-color: whitesmoke;
     border-radius: 8px;
-    margin-bottom: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Login/Signup Section */
+/* Login/Signup */
 .login-signup-section {
     display: flex;
     align-items: center;
@@ -227,11 +224,8 @@ nav a:hover {
     padding: 10px;
     background-color: lightskyblue;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
 }
 
-/* Link to User Profile */
 .login-signup-section a {
     color: whitesmoke;
     text-decoration: none;
@@ -242,7 +236,6 @@ nav a:hover {
     transition: color 0.3s ease;
 }
 
-/* Logout Button */
 .login-signup-section button {
     padding: 8px 12px;
     font-size: 1em;
@@ -254,7 +247,6 @@ nav a:hover {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Login/Signup Section (if user is not logged in) */
 .login-signup-section section {
     display: flex;
     align-items: center;

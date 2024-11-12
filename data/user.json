@@ -35,6 +35,7 @@
     "username": "MoshikAlper",
     "password": "123",
     "fullname": "Moshik Alper",
-    "_id": "jwlIK"
+    "_id": "jwlIK",
+    "isAdmin": true
   }
 ]

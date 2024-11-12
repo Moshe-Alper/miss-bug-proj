@@ -1,60 +1,39 @@
 [
     {
-        "title": "FDADFA",
-        "description": "ADSDS",
-        "severity": 2,
-        "labels": [
-            "33FFA",
-            "ASDAS",
-            "DSASA"
-        ],
-        "_id": "zcJHw",
-        "createdAt": 1731418355932,
-        "updatedAt": 1731418407914,
+        "_id": "abc123",
+        "title": "Cannot save data",
+        "description": "Problem when clicking Save",
+        "severity": 1,
+        "createdAt": 1542107359454,
+        "labels": ["critical", "need-CR", "dev-branch"],
         "owner": {
-            "_id": "jwlIK",
-            "fullname": "Moshik Alper"
-        },
-        "prevId": "wuqX1",
-        "nextId": "qrs345"
+            "_id": "u102",
+            "fullname": "Bell Corgan"
+        }
     },
     {
-        "title": "new bug",
-        "description": "DADADA",
-        "severity": 2,
-        "labels": [
-            "33AD",
-            "ADSASD",
-            "SADADS"
-        ],
-        "_id": "wuqX1",
-        "createdAt": 1731418321890,
-        "updatedAt": 1731418579962,
+        "_id": "def456",
+        "title": "Page does not load",
+        "description": "Blank screen when accessing dashboard",
+        "severity": 5,
+        "createdAt": 1542107459454,
+        "labels": ["frontend", "urgent", "UI-issue"],
         "owner": {
-            "_id": "jwlIK",
-            "fullname": "Moshik Alper"
-        },
-        "prevId": "hij456",
-        "nextId": "bcd890"
+            "_id": "u101",
+            "fullname": "Bell Vedder"
+        }
     },
     {
-        "title": "sDADDAAD",
-        "description": "ADFDAFADFAD",
+        "_id": "ghi789",
+        "title": "Error on login",
+        "description": "User receives error message on login attempt",
         "severity": 3,
-        "labels": [
-            "ADFADF",
-            "DAFFAD",
-            "DFAFAD"
-        ],
-        "_id": "Q9sVG",
-        "createdAt": 1731418119471,
-        "updatedAt": 1731418119471,
+        "createdAt": 1542107559454,
+        "labels": ["authentication", "backend", "high-priority"],
         "owner": {
-            "_id": "jwlIK",
-            "fullname": "Moshik Alper"
-        },
-        "prevId": "yza567",
-        "nextId": "klm789"
+            "_id": "u103",
+            "fullname": "Wilson Sharp"
+        }
     },
     {
         "_id": "jkl012",
@@ -62,17 +41,23 @@
         "description": "Settings button does not respond to clicks",
         "severity": 2,
         "createdAt": 1542107659454,
-        "labels": [
-            "UI",
-            "minor",
-            "needs-investigation"
-        ],
+        "labels": ["UI", "minor", "needs-investigation"],
         "owner": {
             "_id": "u102",
             "fullname": "Bell Corgan"
-        },
-        "prevId": "qrs345",
-        "nextId": "hij456"
+        }
+    },
+    {
+        "_id": "mno345",
+        "title": "Form validation error",
+        "description": "Validation error does not display on required fields",
+        "severity": 2,
+        "createdAt": 1542107759454,
+        "labels": ["validation", "frontend", "user-experience"],
+        "owner": {
+            "_id": "u103",
+            "fullname": "Wilson Sharp"
+        }
     },
     {
         "_id": "pqr678",
@@ -80,17 +65,11 @@
         "description": "User data does not sync across devices",
         "severity": 4,
         "createdAt": 1542107859454,
-        "labels": [
-            "backend",
-            "sync",
-            "medium-priority"
-        ],
+        "labels": ["backend", "sync", "medium-priority"],
         "owner": {
             "_id": "u101",
             "fullname": "Bell Vedder"
-        },
-        "prevId": "stu901",
-        "nextId": "yza567"
+        }
     },
     {
         "_id": "stu901",
@@ -98,16 +77,23 @@
         "description": "Pages take too long to load.",
         "severity": 1,
         "createdAt": 1542107959454,
-        "labels": [
-            "performance",
-            "frontend"
-        ],
+        "labels": ["performance", "frontend"],
         "owner": {
             "_id": "u102",
             "fullname": "Bell Corgan"
-        },
-        "prevId": "nop012",
-        "nextId": "nop012"
+        }
+    },
+    {
+        "_id": "vwx234",
+        "title": "Mobile view not responsive",
+        "description": "Site does not adjust for mobile devices.",
+        "severity": 4,
+        "createdAt": 1542108059454,
+        "labels": ["UI", "mobile", "critical"],
+        "owner": {
+            "_id": "u103",
+            "fullname": "Wilson Sharp"
+        }
     },
     {
         "_id": "yza567",
@@ -115,17 +101,11 @@
         "description": "Users are not receiving email notifications.",
         "severity": 3,
         "createdAt": 1542108159454,
-        "labels": [
-            "notifications",
-            "email",
-            "backend"
-        ],
+        "labels": ["notifications", "email", "backend"],
         "owner": {
             "_id": "u101",
             "fullname": "Bell Vedder"
-        },
-        "prevId": "pqr678",
-        "nextId": "Q9sVG"
+        }
     },
     {
         "_id": "bcd890",
@@ -133,17 +113,23 @@
         "description": "Exporting data does not work.",
         "severity": 4,
         "createdAt": 1542108259454,
-        "labels": [
-            "export",
-            "backend",
-            "high-priority"
-        ],
+        "labels": ["export", "backend", "high-priority"],
         "owner": {
             "_id": "u102",
             "fullname": "Bell Corgan"
-        },
-        "prevId": "wuqX1",
-        "nextId": "qrs345"
+        }
+    },
+    {
+        "_id": "efg123",
+        "title": "Inconsistent UI elements",
+        "description": "Different styles for the same elements.",
+        "severity": 2,
+        "createdAt": 1542108359454,
+        "labels": ["UI", "design", "minor"],
+        "owner": {
+            "_id": "u103",
+            "fullname": "Wilson Sharp"
+        }
     },
     {
         "_id": "hij456",
@@ -151,17 +137,11 @@
         "description": "App crashes when uploading large files.",
         "severity": 5,
         "createdAt": 1542108459454,
-        "labels": [
-            "upload",
-            "crash",
-            "critical"
-        ],
+        "labels": ["upload", "crash", "critical"],
         "owner": {
             "_id": "u101",
             "fullname": "Bell Vedder"
-        },
-        "prevId": "jkl012",
-        "nextId": "wuqX1"
+        }
     },
     {
         "_id": "klm789",
@@ -169,17 +149,11 @@
         "description": "Search returns no results for valid queries.",
         "severity": 3,
         "createdAt": 1542108559454,
-        "labels": [
-            "search",
-            "functionality",
-            "urgent"
-        ],
+        "labels": ["search", "functionality", "urgent"],
         "owner": {
             "_id": "u102",
             "fullname": "Bell Corgan"
-        },
-        "prevId": "Q9sVG",
-        "nextId": "stu901"
+        }
     },
     {
         "_id": "nop012",
@@ -187,17 +161,11 @@
         "description": "Users have access to restricted areas.",
         "severity": 4,
         "createdAt": 1542108659454,
-        "labels": [
-            "security",
-            "permissions",
-            "critical"
-        ],
+        "labels": ["security", "permissions", "critical"],
         "owner": {
             "_id": "u103",
             "fullname": "Wilson Sharp"
-        },
-        "prevId": "stu901",
-        "nextId": "stu901"
+        }
     },
     {
         "_id": "qrs345",
@@ -205,16 +173,10 @@
         "description": "Site does not function properly on certain browsers.",
         "severity": 3,
         "createdAt": 1542108759454,
-        "labels": [
-            "compatibility",
-            "browser",
-            "medium-priority"
-        ],
+        "labels": ["compatibility", "browser", "medium-priority"],
         "owner": {
             "_id": "u101",
             "fullname": "Bell Vedder"
-        },
-        "prevId": "bcd890",
-        "nextId": "jkl012"
+        }
     }
 ]
