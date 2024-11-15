@@ -32,9 +32,9 @@
     "isAdmin": false
   },
   {
-    "username": "MoshikAlper",
-    "password": "123",
-    "fullname": "Moshik Alper",
+    "username": "admin",
+    "password": "admin",
+    "fullname": "admin",
     "_id": "jwlIK",
     "isAdmin": true
   }

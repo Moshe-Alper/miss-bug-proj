@@ -82,36 +82,35 @@ function remove(bugId, user) {
 }
 
 function save(bugToSave, user) {
+    const allowedKeys = ["title", "description", "severity", "createdAt", "labels", "owner"]
 
-    const allowedKeys = ["title", "description", "severity", "createdAt", "labels"]
-
-    const filteredBug = allowedKeys.reduce((acc, current) => {
-        if (current in bugToSave) acc[current] = bugToSave[current]
+    const filteredBug = allowedKeys.reduce((acc, key) => {
+        if (key in bugToSave) acc[key] = bugToSave[key]
         return acc
     }, {})
-    // typescript - in a later date
+
+    // Validate required fields
     if (typeof filteredBug.title !== 'string') throw new Error('Title must be a string')
     if (typeof filteredBug.description !== 'string') throw new Error('Description must be a string')
     if (typeof filteredBug.severity !== 'number') throw new Error('Severity must be a number')
     
-
     if (!Array.isArray(filteredBug.labels)) {
-            if (filteredBug.labels === undefined) {
-                filteredBug.labels = []
-            } else {
-                throw new Error('Labels must be an array')
-            }
-        }
+        filteredBug.labels = filteredBug.labels === undefined ? [] : (() => { throw new Error('Labels must be an array') })()
+    }
 
+    // Update existing bug
     if (bugToSave._id) {
-        if (!user.isAdmin && bugToSave.owner._id !== user._id) return Promise.reject('Not your bug')
-
+        if (!user.isAdmin && bugToSave.owner._id !== user._id) {
+            return Promise.reject('Not your bug')
+        }
 
         const bugIdx = bugs.findIndex(bug => bug._id === bugToSave._id)
         filteredBug._id = bugToSave._id
         filteredBug.updatedAt = Date.now()
         bugs[bugIdx] = { ...bugs[bugIdx], ...filteredBug }
-    } else {
+    } 
+    // Create new bug
+    else {
         const newBug = {
             ...getEmptyBug(),
             ...filteredBug,
@@ -121,10 +120,12 @@ function save(bugToSave, user) {
             owner: user
         }
         bugs.unshift(newBug)
+        return _saveBugsToFile().then(() => newBug)
     }
 
     return _saveBugsToFile().then(() => filteredBug)
 }
+
 
 function _saveBugsToFile() {
     return new Promise((resolve, reject) => {
@@ -137,27 +138,6 @@ function _saveBugsToFile() {
         })
     })
 }
-
-// function generatePdfStream() {
-//     const doc = new PDFDocument({ margin: 30, size: 'A4' })
-//     doc.pipe(fs.createWriteStream('./doc.pdf'))
-//     const sortedBugs = bugs.sort((a, b) => b.createdAt - a.createdAt)
-//     const tableRows = sortedBugs.map(({ title, description: description, severity }) => [title, description, severity])
-
-//     const table = {
-//         title: 'Bugs Report',
-//         subtitle: 'Sorted by Creation Time',
-//         headers: [
-//             { label: 'Title', property: 'title', width: 100, padding: [0, 0, 0, 10] },
-//             { label: 'Description', property: 'description', width: 200, padding: [0, 0, 0, 10] },
-//             { label: 'Severity', property: 'severity', width: 50, padding: [0, 0, 0, 10] }
-//         ],
-//         rows: tableRows
-//     }
-//     return doc.table(table)
-//         .then(() => { doc.end() })
-//         .catch((err) => { })
-// }
 
 function getEmptyBug() {
     return {

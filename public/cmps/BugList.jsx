@@ -18,7 +18,7 @@ export function BugList({ bugs, onRemoveBug, onEditBug }) {
     return (
         <ul className="bug-list">
             {bugs.map((bug) => (
-                <li className="bug-preview" key={bug._id|| `bug-${index}`}>
+                <li className="bug-preview" key={bug._id}>
                     <BugPreview bug={bug} />
                     {isAllowed(bug) && <div>
                         <button onClick={() => onRemoveBug(bug._id)}>x</button>

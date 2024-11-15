@@ -1,4 +1,4 @@
-const Router = ReactRouterDOM.BrowserRouter
+const Router = ReactRouterDOM.HashRouter
 const { Route, Routes } = ReactRouterDOM
 
 import { AppHeader } from './cmps/AppHeader.jsx'
@@ -10,6 +10,8 @@ import { AboutUs } from './pages/AboutUs.jsx'
 import { UserDetails } from './cmps/UserDetails.jsx'
 
 export function App() {
+   
+    
     return (
         <Router>
             <div className='main-app'>
