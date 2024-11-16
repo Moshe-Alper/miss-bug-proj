@@ -2,6 +2,7 @@ const STORAGE_KEY_LOGGEDIN_USER = 'loggedInUser'
 const BASE_URL = '/api/user/'
 
 export const userService = {
+    query,
     login,
     signup,
     logout,
@@ -10,6 +11,10 @@ export const userService = {
     getById,
     getEmptyCredentials
 }
+
+function query() {
+    return axios.get('/api/user').then(res => res.data)
+  }
 
 function login({ username, password }) {
     return axios.post('/api/auth/login', { username, password })
@@ -37,7 +42,12 @@ function logout() {
 }
 
 function getLoggedinUser() {
-    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+    return _getUserFromSession()
+}
+
+function _getUserFromSession() {
+  const entity = sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)
+  return JSON.parse(entity)
 }
 
 function getById(userId) {
