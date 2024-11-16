@@ -22,7 +22,6 @@ export function AdminDashboard() {
         showSuccessMsg('Removed successfully')
       })
       .catch(err => {
-        // console.log('here is the msg from the server', err?.response?.data)
         console.log('err', err)
         showErrorMsg('Had issues removing the user')
       })

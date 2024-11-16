@@ -108,6 +108,28 @@ app.get('/api/user/:userId', (req, res) => {
         })
 })
 
+app.delete('/api/user/:userId', (req, res) => {
+    const { userId } = req.params
+    bugService
+        .hasBugs(userId)
+        .then(() => {
+            userService
+                .remove(userId)
+                .then(() => {
+                    console.log(`User ${userId} removed successfully`)
+                    res.send(`User ${userId} removed successfully!`)
+                })
+                .catch(err => {
+                    console.error(`Cannot remove user ${userId}`, err)
+                    res.status(401).send('Cannot remove user')
+                })
+        })
+        .catch(err => {
+            console.error(`Cannot delete user ${userId} with bugs`, err)
+            res.status(401).send('Cannot delete user with bugs')
+        })
+})
+
 // Auth API
 app.post('/api/auth/login', (req, res) => {
     const credentials = req.body
@@ -156,13 +178,13 @@ app.get('/pdf', (req, res) => {
 
         const fileName = 'bugs'
         pdfService.createPdf({ headers, rows, title: 'Bugs report', fileName }).then(() => {
-            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Type', 'application/pdf')
             res.sendFile(`${process.cwd()}/pdfs/${fileName}.pdf`)
 
 
         }).catch((err) => {
 
-            console.error(err);
+            console.error(err)
             loggerService.error('Cannot download Pdf', err)
             res.send('We have a problem, try again soon')
         })

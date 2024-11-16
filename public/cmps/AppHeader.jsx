@@ -49,6 +49,7 @@ export function AppHeader() {
                 <NavLink to="/bug">Bugs</NavLink> |
                 {user && <NavLink to={`/user/${user._id}`}>Profile</NavLink>}
                 <NavLink to="/about">About</NavLink>
+                {user && user.isAdmin && <NavLink to={"/admin"}>Admin Dashboard</NavLink>}
             </nav>
             <h1>Bugs are Forever</h1>
         </header>

@@ -14,6 +14,7 @@ export const bugService = {
     getById,
     remove,
     save,
+    hasBugs
 }
 
 function query(filterBy = {}) {
@@ -137,6 +138,12 @@ function _saveBugsToFile() {
             resolve()
         })
     })
+}
+
+function hasBugs(userId) {
+    const hasBugs = bugs.some((bug) => bug.owner._id === userId)
+    if (hasBugs) return Promise.reject('Cannot remove user with bugs')
+    return Promise.resolve()
 }
 
 function getEmptyBug() {

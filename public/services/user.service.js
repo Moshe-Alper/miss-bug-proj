@@ -9,6 +9,7 @@ export const userService = {
     getLoggedinUser,
 
     getById,
+    remove,
     getEmptyCredentials
 }
 
@@ -41,19 +42,25 @@ function logout() {
         })
 }
 
+
 function getLoggedinUser() {
     return _getUserFromSession()
 }
 
 function _getUserFromSession() {
-  const entity = sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)
-  return JSON.parse(entity)
+    const entity = sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)
+    return JSON.parse(entity)
 }
 
 function getById(userId) {
     return axios.get(BASE_URL + userId)
-        .then(res => res.data)
+    .then(res => res.data)
 }
+
+function remove(userId) {
+    console.log(userId)
+    return axios.delete('/api/user/' + userId)
+  }
 
 function getEmptyCredentials() {
     return {
